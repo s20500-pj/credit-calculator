@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class LoanResponseDto {
     private boolean decision;
     private int maxAmount;
+    private Integer requiredPeriod;
 }

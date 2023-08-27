@@ -22,7 +22,7 @@ public class PersonDao {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, PersonDto> persons;
         try (InputStream inputStream = new ClassPathResource("persons.json").getInputStream()) {
-            persons = objectMapper.readValue(inputStream, new TypeReference<Map<String, PersonDto>>() {
+            persons = objectMapper.readValue(inputStream, new TypeReference<>() {
             });
         } catch (IOException e) {
             throw new UserDataLoadException();

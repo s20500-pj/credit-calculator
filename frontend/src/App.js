@@ -9,12 +9,12 @@ function App() {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
 
-    const fetchData = () => {
-        if (identifier && period && amount) {
+    const fetchData = (inputIdentifier, inputPeriod, inputAmount) => {
+        if (inputIdentifier && inputPeriod && inputAmount) {
             axios.post('http://localhost:8080/loan/decision', {
-                identifier,
-                period,
-                amount
+                identifier: inputIdentifier,
+                period: inputPeriod,
+                amount: inputAmount
             })
                 .then(res => {
                     setResponse(res.data);
@@ -38,8 +38,9 @@ function App() {
                 placeholder="Enter Identifier"
                 value={identifier}
                 onChange={(e) => {
-                    setIdentifier(e.target.value);
-                    fetchData();
+                    const newIdentifier = e.target.value;
+                    setIdentifier(newIdentifier);
+                    fetchData(newIdentifier, period, amount);
                 }}
             />
             <br/>
@@ -51,8 +52,9 @@ function App() {
                 max={10000}
                 value={amount}
                 onChange={(e) => {
-                    setAmount(Number(e.target.value));
-                    fetchData();
+                    const newAmount = Number(e.target.value);
+                    setAmount(newAmount);
+                    fetchData(identifier, period, newAmount);
                 }}
             />
 
@@ -65,8 +67,9 @@ function App() {
                 max={60}
                 value={period}
                 onChange={(e) => {
-                    setPeriod(Number(e.target.value));
-                    fetchData();
+                    const newPeriod = Number(e.target.value);
+                    setPeriod(newPeriod);
+                    fetchData(identifier, newPeriod, amount);
                 }}
             />
 
@@ -79,6 +82,12 @@ function App() {
         </span>
                     <br/>
                     Max Amount: {response.maxAmount}
+                </div>
+            )}
+
+            {response && response.requiredPeriod && (
+                <div>
+                    Min required period for selected amount: {response.requiredPeriod}
                 </div>
             )}
 
