@@ -1,0 +1,18 @@
+{
+  "49002010965": {
+    "debt": true,
+    "creditModifier": null
+  },
+  "49002010976": {
+    "debt": false,
+    "creditModifier": 100
+  },
+  "49002010987": {
+    "debt": false,
+    "creditModifier": 300
+  },
+  "49002010998": {
+    "debt": false,
+    "creditModifier": 1000
+  }
+}
